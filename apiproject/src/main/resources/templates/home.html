@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{${'css/bootstrap.css?v='} + ${standardDate}}" rel="stylesheet" media="screen"/>
+    <link th:href="@{${'css/Stylessheet.css?v='} + ${standardDate}}" rel="stylesheet" media="screen"/>
+    <script th:src="@{webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}" rel="javascript"></script>
+    <title>WebCrawler</title>
+</head>
+<body>
+<div class="container">
+    <form id="webcrawler" name="webcrawler" action="/" method="POST" enctype="multipart/form-data"
+          th:object="${formSubmission}">
+    <div class="form-group">
+    <label for="customerEmail" class="headings">Email</label>
+    <input type="customerEmail" class="form-control" id="customerEmail" name="customerEmail"
+           th:field='*{customerEmail}' required="" placeholder="Please enter your Email Address..."/>
+    <div id="customerEmail-error" style="display:none"/>
+    </div>
+        <div class="form-group">
+        <label for="origin" class="headings">Origin</label>
+        <input type="origin" class="form-control" id="origin" name="origin"
+               th:field='*{origin}' required="" placeholder="Please enter your Origin..."/>
+        <div id="origin-error" style="display:none"/>
+        </div>
+    <div class="form-group">
+        <label for="destination" class="headings">Destination</label>
+        <input type="destination" class="form-control" id="destination" name="origin"
+               th:field='*{destination}' required="" placeholder="Please enter your Destination..."/>
+        <div id="destination-error" style="display:none"/>
+    </div>
+    <div class="form-group">
+        <label class="headings" for="options">Frequency</label>
+        <select id="options" th:field="*{frequency}" required="" class="form-control"
+                th:readonly="(${FREQUENCY_PROVIDED}) and (!${#fields.hasErrors('frequency')})">
+            <option value="" selected="" hidden="" id="frequencyDefaultText">Please choose the Frequency...</option>
+
+            <option th:each="frequencyOption : ${allFrequencies}" th:value="${frequencyOption}" th:text="#{${'FREQUENCY.' + frequencyOption}}"
+                    th:disabled="(${FREQUENCY_PROVIDED}) and (!${#strings.equals(formSubmission.frequency, frequencyOption)}) and (!${#fields.hasErrors('frequency')})"></option>
+        </select>
+        <div id="options-error" style="display:none">Invalid Frequency</div>
+    </div>
+    <button id="submitBtn" name="submitBtn" class="btn btn-primary start submit">
+        <i class="glyphicon glyphicon-upload"></i>
+        Submit
+    </button>
+    </form>
+</div>
+
+</body>
+</html>
