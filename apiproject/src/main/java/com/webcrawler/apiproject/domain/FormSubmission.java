@@ -10,23 +10,35 @@ import javax.validation.groups.Default;
 @ValidForm(groups = Default.class)
 @Data
 public class FormSubmission {
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
     private String customerEmail;
-    private String origin;
-    private String destination;
+    private String flightOrigin;
+    private String flightDestination;
     private String frequency;
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("FormSubmission{");
 
+        if (firstName != null) {
+            sb.append("firstName='" + firstName + "', ");
+        }
+        if (lastName != null) {
+            sb.append("lastName=" + lastName + ", ");
+        }
+        if (phoneNumber != null) {
+            sb.append("phoneNumber=" + phoneNumber  + ", ");
+        }
         if (customerEmail != null) {
             sb.append("customerEmail='" + customerEmail + "', ");
         }
-        if (origin != null) {
-            sb.append("origin=" + origin + ", ");
+        if (flightOrigin != null) {
+            sb.append("flightOrigin=" + flightOrigin + ", ");
         }
-        if (destination != null) {
-            sb.append("destination=" + destination  + ", ");
+        if (flightDestination != null) {
+            sb.append("flightDestination=" + flightDestination + ", ");
         }
         if (frequency != null) {
             sb.append("frequency=" + frequency );

@@ -1,6 +1,7 @@
 package com.webcrawler.apiproject.service;
 
 import com.webcrawler.apiproject.domain.CustomerProfile;
+import org.springframework.stereotype.Service;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -13,6 +14,7 @@ import java.util.List;
 public class CustomerProfileService {
     @PersistenceContext(unitName = "customer-profile")
     private EntityManager entityManager;
+
     public void addCustomerProfile(CustomerProfile customerProfile) {
         entityManager.persist(customerProfile);
     }
