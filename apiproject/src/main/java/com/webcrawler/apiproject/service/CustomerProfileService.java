@@ -83,23 +83,3 @@ public class CustomerProfileService implements CustomerProfileDAO {
         return null;
     }
 }
-/*
-@Stateless
-public class CustomerProfileService {
-    @PersistenceContext(unitName = "customerProfile-pu")
-    private EntityManager entityManager;
-
-    public void addCustomerProfile(CustomerProfile customerProfile) {
-        entityManager.persist(customerProfile);
-    }
-    public List<CustomerProfile> getAllCustomerProfiles() {
-        CriteriaQuery<CustomerProfile> criteriaQuery = entityManager.getCriteriaBuilder().createQuery(CustomerProfile.class);
-        criteriaQuery.select(criteriaQuery.from(CustomerProfile.class));
-        return entityManager.createQuery(criteriaQuery).getResultList();
-    }
-    public void clear() {
-        Query removeAll = entityManager.createQuery("delete from CustomerProfile");
-        removeAll.executeUpdate();
-    }
-}
-*/

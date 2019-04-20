@@ -2,11 +2,14 @@ package com.webcrawler.apiproject.controller;
 
 import com.webcrawler.apiproject.dao.CustomerProfileDAO;
 import com.webcrawler.apiproject.domain.CustomerProfile;
+import com.webcrawler.apiproject.domain.FlightInformation;
 import com.webcrawler.apiproject.domain.FormSubmission;
 import com.webcrawler.apiproject.enums.Frequency;
 import com.webcrawler.apiproject.service.CustomerProfileService;
+import com.webcrawler.apiproject.service.FlightInformationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,21 +32,18 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class WebCrawlerController {
+    @Autowired
     private CustomerProfileService customerProfileService;
-    private CustomerProfileDAO customerProfileDAO;
+    @Autowired
+    private FlightInformationService flightInformationService;
 
-    public WebCrawlerController(CustomerProfileService customerProfileService, CustomerProfileDAO customerProfileDAO) {
-        this.customerProfileService = customerProfileService;
-        this.customerProfileDAO = customerProfileDAO;
-
-    }
     @GetMapping("/")
-    public String getForm(@RequestParam(required = false, value = "firstName") String firstName,
-                          @RequestParam(required = false, value = "lastName") String lastName,
+    public String getForm(@RequestParam(required = false, value = "flightName") String firstName,
+                          @RequestParam(required = false, value = "flightNumber") String lastName,
                           @RequestParam(required = false, value = "customerEmail") String customerEmail,
                           @RequestParam(required = false, value = "phoneNumber") String phoneNumber,
-                          @RequestParam(required = false, value = "flightOrigin") String flightOrigin,
-                          @RequestParam(required = false, value = "flightDestination") String flightDestination,
+                          @RequestParam(required = false, value = "flightOriginCode") String flightOrigin,
+                          @RequestParam(required = false, value = "flightDestinationCode") String flightDestination,
                           @RequestParam(required = false, value = "frequency") String frequency,
                           Model model) {
         FormSubmission formSubmission = new FormSubmission();

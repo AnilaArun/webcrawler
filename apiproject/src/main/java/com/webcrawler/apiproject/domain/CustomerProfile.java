@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class CustomerProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private int id;
     private String firstName;
     private String lastName;
     private String phoneNumber;
@@ -29,10 +29,10 @@ public class CustomerProfile {
         StringBuilder sb = new StringBuilder("CustomerProfile{");
 
         if (firstName != null) {
-            sb.append("firstName='" + firstName + "', ");
+            sb.append("flightName='" + firstName + "', ");
         }
         if (lastName != null) {
-            sb.append("lastName=" + lastName + ", ");
+            sb.append("flightNumber=" + lastName + ", ");
         }
         if (phoneNumber != null) {
             sb.append("phoneNumber=" + phoneNumber + ", ");
@@ -41,10 +41,10 @@ public class CustomerProfile {
             sb.append("customerEmail='" + customerEmail + "', ");
         }
         if (flightOrigin != null) {
-            sb.append("flightOrigin=" + flightOrigin + ", ");
+            sb.append("flightOriginCode=" + flightOrigin + ", ");
         }
         if (flightDestination != null) {
-            sb.append("flightDestination=" + flightDestination  + ", ");
+            sb.append("flightDestinationCode=" + flightDestination  + ", ");
         }
         if (frequency != null) {
             sb.append("frequency=" + frequency );

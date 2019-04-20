@@ -17,6 +17,6 @@ public class WebCrawlerControllerTest {
     @Before
     public void setup(){
         MockitoAnnotations.initMocks(this);
-        webCrawlerController = new WebCrawlerController(customerProfileService);
+        webCrawlerController = new WebCrawlerController();
     }
 }

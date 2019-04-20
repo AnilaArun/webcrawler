@@ -26,6 +26,16 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
+                <!--<exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-tomcat</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId> org.hibernate</groupId>
+                        <artifactId>hibernate-validator</artifactId>
+                    </exclusion>
+                </exclusions>-->
             </dependency>
             <dependency>
                 <groupId>javax</groupId>
@@ -41,8 +51,29 @@
             <dependency>
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
-                <scope>runtime</scope>
+                <version>1.4.197</version>
+                <!--<scope>runtime</scope>-->
             </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>2.1.3.RELEASE</version>
+            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.hibernate</groupId>-->
+<!--                <artifactId>hibernate-validator</artifactId>-->
+<!--                &lt;!&ndash;<version>6.0.13.Final</version>&ndash;&gt;-->
+<!--            </dependency>-->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-jpa</artifactId>
+                <version>2.1.5.RELEASE</version>
+            </dependency>
+           <!-- <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate</artifactId>
+                &lt;!&ndash;<version>3.2.3.ga</version>&ndash;&gt;
+            </dependency>-->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
@@ -53,11 +84,45 @@
                 <artifactId>spring-boot-starter-test</artifactId>
                 <scope>test</scope>
             </dependency>
-            <dependency>
+            <!--<dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>3.5.6-Final</version>
+            </dependency>-->
+            <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+            <!--<dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>5.4.2.Final</version>
+            </dependency>-->
+
+
+            <!--<dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>5.2.2.Final</version>
+            </dependency>-->
+            <!--<dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-autoconfigure</artifactId>
                 <version>2.1.4.RELEASE</version>
+            </dependency>-->
+            <!--<dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>5.1.6.RELEASE</version>
+            </dependency>-->
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>5.1.6.RELEASE</version>
             </dependency>
+            <!--<dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>5.1.6.RELEASE</version>
+            </dependency>-->
         </dependencies>
 
         <build>
