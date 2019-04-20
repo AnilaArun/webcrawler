@@ -27,8 +27,9 @@
     <div class="form-group">
     <label for="customerEmail" class="headings">Email</label>
     <input type="customerEmail" class="form-control" id="customerEmail" name="customerEmail"
-           th:field='*{customerEmail}' required="" placeholder="Please enter your Email Address..."/>
-    <div id="customerEmail-error" style="display:none"/>
+           th:field='*{customerEmail}' required="" placeholder="Please enter your Email Address..." onchange="confirmEmail(form)"/>
+    <div id="customerEmail-error" style="display:none"/><!--
+    <div id="confirm" value="confirm" />-->
     </div>
         <div class="form-group">
             <label for="phoneNumber" class="headings">Phone Number</label>
@@ -65,5 +66,17 @@
     </button>
     </form>
 </div>
-</body>
+<SCRIPT LANGUAGE="JavaScript">
+    function confirmEmail(form){
+        customerEmailValue = form.customerEmail.value;
+        console.log("Customer Email : " + customerEmailValue);
+        if (customerEmailValue != null) {
+            var confirm = document.createElement('confirm');
+            confirm.setAttribute('href', "http://localhost:8080/confirmation.html");
+            confirm.innerText = "Please click here to confirm your emailID";
+            document.getElementsByTagName('body')[4].appendChild(confirm);
+        }
+    }
+</SCRIPT>
+    </body>
 </html>

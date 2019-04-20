@@ -1,14 +1,14 @@
 package com.webcrawler.apiproject.service;
 
-import com.webcrawler.apiproject.dao.CustomerProfileDAO;
 import com.webcrawler.apiproject.dao.FlightInformationDAO;
-import com.webcrawler.apiproject.domain.CustomerProfile;
 import com.webcrawler.apiproject.domain.FlightInformation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class FlightInformationService implements FlightInformationDAO {
 
     @Autowired
