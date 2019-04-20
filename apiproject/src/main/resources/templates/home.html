@@ -12,6 +12,18 @@
 <div class="container">
     <form id="webcrawler" name="webcrawler" action="/" method="POST" enctype="multipart/form-data"
           th:object="${formSubmission}">
+        <div class="form-group">
+            <label for="firstName" class="headings">FirstName</label>
+            <input type="firstName" class="form-control" id="firstName" name="firstName"
+                   th:field='*{customerEmail}' required="" placeholder="Please enter your firstName..."/>
+            <div id="firstName-error" style="display:none"/>
+        </div>
+        <div class="form-group">
+            <label for="lastName" class="headings">LastName</label>
+            <input type="lastName" class="form-control" id="lastName" name="lastName"
+                   th:field='*{lastName}' required="" placeholder="Please enter your lastName..."/>
+            <div id="lastName-error" style="display:none"/>
+        </div>
     <div class="form-group">
     <label for="customerEmail" class="headings">Email</label>
     <input type="customerEmail" class="form-control" id="customerEmail" name="customerEmail"
@@ -19,16 +31,22 @@
     <div id="customerEmail-error" style="display:none"/>
     </div>
         <div class="form-group">
-        <label for="origin" class="headings">Origin</label>
-        <input type="origin" class="form-control" id="origin" name="origin"
-               th:field='*{origin}' required="" placeholder="Please enter your Origin..."/>
-        <div id="origin-error" style="display:none"/>
+            <label for="phoneNumber" class="headings">Phone Number</label>
+            <input type="phoneNumber" class="form-control" id="phoneNumber" name="phoneNumber"
+                   th:field='*{phoneNumber}' required="" placeholder="Please enter your phoneNumber..."/>
+            <div id="phoneNumber-error" style="display:none"/>
+        </div>
+        <div class="form-group">
+        <label for="flightOrigin" class="headings">Flight Origin</label>
+        <input type="flightOrigin" class="form-control" id="flightOrigin" name="flightOrigin"
+               th:field='*{flightOrigin}' required="" placeholder="Please enter your flightOrigin..."/>
+        <div id="flightOrigin-error" style="display:none"/>
         </div>
     <div class="form-group">
-        <label for="destination" class="headings">Destination</label>
-        <input type="destination" class="form-control" id="destination" name="origin"
-               th:field='*{destination}' required="" placeholder="Please enter your Destination..."/>
-        <div id="destination-error" style="display:none"/>
+        <label for="flightDestination" class="headings">Flight Destination</label>
+        <input type="flightDestination" class="form-control" id="flightDestination" name="flightDestination"
+               th:field='*{flightDestination}' required="" placeholder="Please enter your flight Destination..."/>
+        <div id="flightDestination-error" style="display:none"/>
     </div>
     <div class="form-group">
         <label class="headings" for="options">Frequency</label>
