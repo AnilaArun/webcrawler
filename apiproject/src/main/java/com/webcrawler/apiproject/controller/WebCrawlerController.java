@@ -1,5 +1,6 @@
 package com.webcrawler.apiproject.controller;
 
+import com.webcrawler.apiproject.dao.CustomerProfileDAO;
 import com.webcrawler.apiproject.domain.CustomerProfile;
 import com.webcrawler.apiproject.domain.FormSubmission;
 import com.webcrawler.apiproject.enums.Frequency;
@@ -29,9 +30,11 @@ import java.util.List;
 @Slf4j
 public class WebCrawlerController {
     private CustomerProfileService customerProfileService;
+    private CustomerProfileDAO customerProfileDAO;
 
-    public WebCrawlerController(CustomerProfileService customerProfileService) {
+    public WebCrawlerController(CustomerProfileService customerProfileService, CustomerProfileDAO customerProfileDAO) {
         this.customerProfileService = customerProfileService;
+        this.customerProfileDAO = customerProfileDAO;
 
     }
     @GetMapping("/")
@@ -64,7 +67,9 @@ public class WebCrawlerController {
             log.info("FormSubmission is not null");
         }
 
-        customerProfileService.addCustomerProfile(getCustomerProfile(formSubmission));
+        //customerProfileDAO.save(getCustomerProfile(formSubmission));
+
+        customerProfileService.save(getCustomerProfile(formSubmission));
         return ResponseEntity.ok().body("Success");
     }
 

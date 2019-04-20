@@ -10,7 +10,10 @@ import javax.ejb.Startup;
 import javax.inject.Inject;
 import java.util.stream.Stream;
 
-@Startup
+public class DbStartupBean {
+
+}
+/*@Startup
 @Singleton
 public class DbStartupBean {
     private final CustomerProfileService customerProfileService;
@@ -22,10 +25,7 @@ public class DbStartupBean {
 
     @PostConstruct
     private void startup() {
-        // Top beers from https://www.beeradvocate.com/lists/top/
-        Stream.of("Kentucky Brunch Brand Stout", "Marshmallow Handjee",
-                "Barrel-Aged Abraxas", "Heady Topper",
-                "Budweiser", "Coors Light", "PBR").forEach(name ->
+        Stream.of().forEach(name ->
                 customerProfileService.addCustomerProfile(new CustomerProfile())
         );
         customerProfileService.getAllCustomerProfiles().forEach(System.out::println);
@@ -34,4 +34,4 @@ public class DbStartupBean {
     private void shutdown() {
         customerProfileService.clear();
     }
-}
+}*/
