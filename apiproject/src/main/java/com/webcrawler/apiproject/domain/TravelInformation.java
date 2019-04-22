@@ -5,8 +5,11 @@ import lombok.Data;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
+/**
+ * This is to store the customer TravelInfomation data. This can be used to refer if email has already sent to customer
+ *
+ */
 @Entity
 @Data
 @Table(name = "TRAVELINFORMATION")
@@ -20,32 +23,43 @@ public class TravelInformation {
     private int flightInformationId;
     private float price;
     private boolean sendEmail;
-    private Date travelDate;
+    private LocalDate travelDate;
     private String createdBy;
     private String modifiedBy;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
     private LocalDate emailSendDate;
 
-    /*@Override
+    @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("CustomerProfile{");
+        StringBuilder sb = new StringBuilder("TravelInformation{");
 
-        if (flightName != null) {
-            sb.append("flightName='" + flightName + "', ");
+        if ((Integer) customerId != null) {
+            sb.append("customerId='" + customerId + "', ");
         }
-        if (flightNumber != null) {
-            sb.append("flightNumber=" + flightNumber + ", ");
+        if ((Integer) flightInformationId != null) {
+            sb.append("flightInformationId=" + flightInformationId + ", ");
         }
-        if (flightOriginCode != null) {
-            sb.append("flightOriginCode=" + flightOriginCode + ", ");
+        if ((Float) price != null) {
+            sb.append("price=" + price  + ", ");
         }
-        if (flightDestinationCode != null) {
-            sb.append("flightDestinationCode=" + flightDestinationCode);
+        if (travelDate != null) {
+            sb.append("travelDate='" + travelDate + "', ");
         }
-
+        if (flightOrigin != null) {
+            sb.append("flightOrigin=" + flightOrigin + ", ");
+        }
+        if (flightDestination != null) {
+            sb.append("flightDestination=" + flightDestination + ", ");
+        }
+        if (emailSendDate != null) {
+            sb.append("emailSendDate=" + emailSendDate + ", ");
+        }
+        if ((Boolean)  sendEmail!= null) {
+            sb.append("sendEmail=" + sendEmail );
+        }
         sb.append("}");
 
         return sb.toString();
-    }*/
+    }
 }

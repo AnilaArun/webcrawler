@@ -5,6 +5,9 @@ import lombok.Data;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * To store the flightinformation data to FLIGHTINFORMATION where a customer data can be compared against to send the notification
+ */
 @Entity
 @Data
 @Table(name = "FLIGHTINFORMATION")
@@ -32,6 +35,12 @@ public class FlightInformation {
         }
         if (flightNumber != null) {
             sb.append("flightNumber=" + flightNumber + ", ");
+        }
+        if ((Float) price != null) {
+            sb.append("price=" + price + ", ");
+        }
+        if (flightDateAndTime != null) {
+            sb.append("flightDateAndTime=" + flightDateAndTime + ", ");
         }
         if (flightOriginCode != null) {
             sb.append("flightOriginCode=" + flightOriginCode + ", ");

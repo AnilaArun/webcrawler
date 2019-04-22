@@ -1,6 +1,6 @@
 package com.webcrawler.apiproject.poller;
 
-import com.webcrawler.apiproject.service.FlightInformationUpdateService;
+import com.webcrawler.apiproject.service.FlightService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -11,32 +11,31 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class FlightInformationUpdatePoller {
-    private FlightInformationUpdateService flightInformationUpdateService;
+    private FlightService flightService;
 
-    public FlightInformationUpdatePoller(FlightInformationUpdateService flightInformationUpdateService) {
-        this.flightInformationUpdateService = flightInformationUpdateService;
+    public FlightInformationUpdatePoller(FlightService flightService) {
+        this.flightService = flightService;
     }
 
     @Scheduled(cron = "${poller.saveFlightDetails.cron}")
     public void scheduleFlightInformationSave() {
         // this scheduler runs every hour and pulls the flight details and save it to DB.
         log.info("Inside the FlightDetailsUpdatePoller");
-        flightInformationUpdateService.save();
+        flightService.save();
     }
 
-    /*@Scheduled(cron = "${poller.updateFlightDetails.cron}")
+    @Scheduled(cron = "${poller.updateFlightDetails.cron}")
     public void scheduleFlightInformationUpdate() {
         // This can be used to run the scheduler everyday at 8:15 pm to saveId the existing record with new price
         log.info("Inside the FlightDetailsUpdatePoller");
-        flightInformationUpdateService.saveId();
-    }*/
+        flightService.updateFlightInformation();
+    }
 
     @Scheduled(cron = "${poller.customerUpdate.cron}")
     public void scheduleCustomerUpdate() {
         // This is used to run the scheduler everyday at 7 pm to send the latest flight deals to the customer
         log.info("Inside the FlightDetailsUpdatePoller");
-        flightInformationUpdateService.customerUpdate();
-        flightInformationUpdateService.delete();
+        flightService.updateCustomer();
+        flightService.removeOlderData();
     }
-
 }

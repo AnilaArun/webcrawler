@@ -1,5 +1,8 @@
 package com.webcrawler.apiproject.enums;
 
+/**
+ * Enumeration of the travel location names
+ */
 public enum Location {
     BHD("Belfast George Best City"), LHR("London Heathrow"),COK("Kochi"),
     DXB("Dubai International"),BOS("Boston Logan International"), BWI("Baltimore Washington International"),

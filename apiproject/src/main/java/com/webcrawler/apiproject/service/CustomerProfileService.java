@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * This class is to update, retrieve or delete the CustomerProfile data from the CustomerProfile DB
+ */
 @Service
 public class CustomerProfileService implements CustomerProfileDAO {
 

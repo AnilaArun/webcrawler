@@ -8,16 +8,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * This class is used to save, retrieve otr delete data from FlightInformation db
+ */
 @Service
 public class FlightInformationService implements FlightInformationDAO {
 
     @Autowired
     private FlightInformationDAO flightInformationDAO;
-
-    //private FlightInformation flightInformation;
-    /*public FlightInformationService(FlightInformation flightInformation) {
-        this.flightInformation = flightInformation;
-    }*/
 
     @Override
     public FlightInformation save(FlightInformation flightInformation) {
@@ -41,11 +39,6 @@ public class FlightInformationService implements FlightInformationDAO {
     public List<FlightInformation> findByFlightOriginCode(String flightOriginCode) {
         return flightInformationDAO.findByFlightOriginCode(flightOriginCode);
     }
-
-    /*@Override
-    public void updateFlightInformation(FlightInformation flightInformation) {
-
-    }*/
 
     @Override
     public Optional<FlightInformation> findById(Long aLong) {
@@ -74,7 +67,7 @@ public class FlightInformationService implements FlightInformationDAO {
 
     @Override
     public void deleteById(Long aLong) {
-
+        flightInformationDAO.deleteById(aLong);
     }
 
     @Override

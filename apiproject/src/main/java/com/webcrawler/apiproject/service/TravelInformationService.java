@@ -5,12 +5,11 @@ import com.webcrawler.apiproject.domain.CustomerProfile;
 import com.webcrawler.apiproject.domain.FlightInformation;
 import com.webcrawler.apiproject.domain.TravelInformation;
 import com.webcrawler.apiproject.enums.Location;
+import com.webcrawler.apiproject.util.TravelInformationUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,11 +29,6 @@ public class TravelInformationService implements TravelInformationDAO {
     public List<TravelInformation> findByFlightInformationId(String flightInformationId) {
         return travelInformationDAO.findByFlightInformationId(flightInformationId);
     }
-
-   /* @Override
-    public TravelInformation saveId(int travelInformationId) {
-        return travelInformationDAO.saveId(travelInformationId);
-    }*/
 
     @Override
     public TravelInformation save(TravelInformation travelInformation) {
@@ -96,16 +90,7 @@ public class TravelInformationService implements TravelInformationDAO {
         flightInformations.forEach((FlightInformation flightInformation)-> {
             if ((Location.valueOf(flightInformation.getFlightOriginCode()).getValue().contains(customerProfile.getFlightOrigin())) &&
                     (Location.valueOf(flightInformation.getFlightDestinationCode()).getValue().contains(customerProfile.getFlightDestination()))) {
-                TravelInformation travelInformation = new TravelInformation();
-                travelInformation.setCustomerId(customerProfile.getId());
-                travelInformation.setFlightOrigin(customerProfile.getFlightOrigin());
-                travelInformation.setFlightDestination(customerProfile.getFlightDestination());
-                travelInformation.setFlightInformationId(flightInformation.getId());
-                travelInformation.setPrice(flightInformation.getPrice());
-                travelInformation.setEmailSendDate(LocalDate.now());
-                travelInformation.setCreatedDate(LocalDateTime.now());
-                travelInformation.setSendEmail(true);
-                travelInformationDAO.save(travelInformation);
+                TravelInformationUtil.setAndSaveTravelInformationData(travelInformationDAO, customerProfile, flightInformation);
                 log.info("Sending the first email to : " + customerProfile.getFirstName() + " " + customerProfile.getLastName());
             }
         });

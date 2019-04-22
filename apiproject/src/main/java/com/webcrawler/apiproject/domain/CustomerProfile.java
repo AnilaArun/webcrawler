@@ -5,8 +5,10 @@ import lombok.Data;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
+/**
+ * CustomerProfile class to save the customer provided information to the CUSTOMERPROFILE db
+ */
 @Entity
 @Data
 @Table(name = "CUSTOMERPROFILE")
@@ -48,6 +50,9 @@ public class CustomerProfile {
         }
         if (flightDestination != null) {
             sb.append("flightDestinationCode=" + flightDestination  + ", ");
+        }
+        if (travelDate != null) {
+            sb.append("travelDate=" + travelDate  + ", ");
         }
         if (frequency != null) {
             sb.append("frequency=" + frequency );

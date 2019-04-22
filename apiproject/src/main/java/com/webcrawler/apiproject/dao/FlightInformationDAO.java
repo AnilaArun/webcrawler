@@ -9,10 +9,8 @@ import java.util.List;
 @Repository
 public interface FlightInformationDAO extends CrudRepository<FlightInformation, Long> {
 
-    //public void save()
     public List<FlightInformation> findByFlightDestinationCode(String flightDestinationCode);
 
     public List<FlightInformation> findByFlightOriginCode(String flightOriginCode);
 
-    //public void updateFlightInformation(FlightInformation flightInformation);
 }

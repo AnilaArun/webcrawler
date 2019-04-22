@@ -20,6 +20,9 @@ import java.util.List;
 @Slf4j
 public class FlightService {
     @Autowired
+    FlightInformationDAO flightInformationDAO;
+
+    @Autowired
     CustomerProfileDAO customerProfileDAO;
 
     @Autowired
@@ -37,13 +40,24 @@ public class FlightService {
         return flightInformation;
     }
 
-    public void updateCustomer(Iterable<FlightInformation> flightInformations) {
+    /**
+     * This method can use to update the FlightInformation table with latest Flight deals
+     */
+    public void save() {
+        /*FlightInformation flightInformation = flightService.getFlightInformation();
+        //update the flight information and save
+        flightInformationDAO.save(flightInformation);*/
+    }
+
+    public void updateCustomer() {
+        Iterable<FlightInformation> flightInformations = flightInformationDAO.findAll();
         Iterable<CustomerProfile> customerProfiles = customerProfileDAO.findAll();
 
         flightInformations.forEach((FlightInformation flightInformation)-> {
             customerProfiles.forEach((CustomerProfile customerProfile)-> {
                 if ((Location.valueOf(flightInformation.getFlightOriginCode()).getValue().contains(customerProfile.getFlightOrigin())) &&
-                        (Location.valueOf(flightInformation.getFlightDestinationCode()).getValue().contains(customerProfile.getFlightDestination()))) {
+                        (Location.valueOf(flightInformation.getFlightDestinationCode()).getValue().contains(customerProfile.getFlightDestination())) &&
+                        (flightInformation.getFlightDateAndTime().toLocalDate().equals(customerProfile.getTravelDate()))) {
 
                     List<TravelInformation> travelInformations = travelInformationDAO.findByCustomerId(customerProfile.getId());
 
@@ -52,7 +66,6 @@ public class FlightService {
                         log.info("TravelInformation data is null so adding flightInformation and Customer Information");
                         log.info("Also sending an email to the customer with current best deal");
                     } else {
-                        //if (flightInformation.getPrice() <=
                         travelInformations.forEach((TravelInformation travelInformation) -> {
                             if (!travelInformation.isSendEmail()) {
                                 populateTravelInformationData(flightInformation, customerProfile);
@@ -136,18 +149,44 @@ public class FlightService {
         travelInformationDAO.save(travelInformation);
     }
 
-    public void delete(FlightInformationDAO flightInformationDAO) {
+    public void removeOlderData() {
         Iterable<FlightInformation> flightInformations = flightInformationDAO.findAll();
         flightInformations.forEach((FlightInformation flightInformation)-> {
             if (flightInformation.getFlightDateAndTime().isBefore(LocalDateTime.now())) {
                 flightInformationDAO.deleteById((long) flightInformation.getId());
-                /*TravelInformation travelInformation = travelInformationDAO.
-                travelInformationDAO.deleteById(fl);*//*TravelInformation travelInformation = travelInformationDAO.
-                travelInformationDAO.deleteById(fl);*/
-
+                log.info("Delete the older file information with date : " + flightInformation.getId());
             }
         });
 
+        Iterable<CustomerProfile> customerProfiles = customerProfileDAO.findAll();
+        customerProfiles.forEach((CustomerProfile customerProfile)-> {
+            if (customerProfile.getTravelDate().isBefore(LocalDate.now())) {
+                customerProfileDAO.deleteById((long) customerProfile.getId());
+                log.info("Delete the older customerProfile with date : " + customerProfile.getId());
+            }
+        });
+
+        Iterable<TravelInformation> travelInformations = travelInformationDAO.findAll();
+        travelInformations.forEach((TravelInformation travelInformation)-> {
+            if (travelInformation.getTravelDate().isBefore(LocalDate.now())) {
+                customerProfileDAO.deleteById((long) travelInformation.getId());
+                log.info("Delete the older travelInformation with date : " + travelInformation.getId());
+            }
+        });
+    }
+
+    public void updateFlightInformation() {
+        Iterable<FlightInformation> flightInformations = flightInformationDAO.findAll();
+        flightInformations.forEach((FlightInformation flightInformation)-> {
+            FlightInformation existedFlightInformation = getFlightInformation();
+            if ((flightInformation.getFlightDateAndTime().equals(existedFlightInformation.getFlightDateAndTime())) &&
+                    (flightInformation.getFlightOriginCode().equals(existedFlightInformation.getFlightOriginCode())) &&
+                    (flightInformation.getFlightDestinationCode().equals(existedFlightInformation.getFlightDestinationCode())) &&
+                    (flightInformation.getPrice() < existedFlightInformation.getPrice())) {
+                //implement the code to update the travelInformation table
+            }
+
+        });
 
     }
 }

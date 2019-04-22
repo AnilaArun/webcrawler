@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * This is the controller class to get the form, it also saves the customer data to CustomerProfile DB
+ * Controller class which handles all request from to get the form, it also saves the customer data to CustomerProfile DB
  */
 @Controller
 @RequiredArgsConstructor
@@ -39,6 +39,20 @@ public class WebCrawlerController {
     @Autowired
     TravelInformationService travelInformationService;
 
+    /**
+     * Handles home page  get request.
+     *
+     * @param firstName
+     * @param lastName
+     * @param customerEmail
+     * @param phoneNumber
+     * @param flightOrigin
+     * @param flightDestination
+     * @param travelDate
+     * @param frequency
+     * @param model
+     * @return home - the view to be resolved
+     */
     @GetMapping("/")
     public String getForm(@RequestParam(required = false, value = "flightName") String firstName,
                           @RequestParam(required = false, value = "flightNumber") String lastName,
@@ -58,15 +72,24 @@ public class WebCrawlerController {
         formSubmission.setFlightDestination(flightDestination);
         formSubmission.setFlightOrigin(flightOrigin);
         formSubmission.setFrequency(frequency);
-        //String hiddenDate = formSubmission.
         if (travelDate != null) {
-            formSubmission.setTravelDate(LocalDate.of(Integer.parseInt(travelDate.substring(0,3)), Integer.parseInt(travelDate.substring(5,6)), Integer.parseInt(travelDate.substring(7,8))));
+            formSubmission.setTravelDate(LocalDate.of(Integer.parseInt(travelDate.substring(0,3)),
+                    Integer.parseInt(travelDate.substring(5,6)), Integer.parseInt(travelDate.substring(7,8))));
         }
         model.addAttribute("formSubmission", formSubmission);
         return "home";
 
     }
 
+    /**
+     * Save the Customer Profile to the DB
+     *
+     * @param formSubmission
+     * @param bindingResult
+     * @param model
+     * @return - A success message to the browser
+     * @throws IOException
+     */
     @PostMapping("/")
     public ResponseEntity<String> saveCustomerData(@ModelAttribute @Validated FormSubmission formSubmission,
                                                           BindingResult bindingResult,
@@ -75,30 +98,13 @@ public class WebCrawlerController {
             if (formSubmission.getCustomerEmail() != null) {
                 log.info("Please go to http://localhost:8080/confirmation to confirm the email: " + formSubmission.getCustomerEmail());
             }
-
-            log.info("FormSubmission is not null");
             CustomerProfile customerProfile = customerProfileService.save(getCustomerProfile(formSubmission));
             travelInformationService.updateWithCustomerAndFlightData(customerProfile, flightInformationService);
-            //This flighhtInformation Code is to mock the information as there is no webservice call to retrieve flightDetails
-            /*FlightInformation flightInformation = flightInformationService.save(getFlightInformation(formSubmission, customerProfile));
-            //This TravelInformation table is to store the customerId and flightId and mailSendDate etc to determine when the email was send
-            TravelInformation travelInformation = travelInformationService.save(getTravelInformation(flightInformation.getId(), formSubmission, customerProfile));
-*/
+        } else {
+            log.info("FormSubmission was null");
         }
         return ResponseEntity.ok().body("Success");
     }
-
-
-    /*private FlightInformation getFlightInformation(FormSubmission formSubmission, CustomerProfile customerProfile) {
-        FlightInformation flightInformation = new FlightInformation();
-        flightInformation.setFlightOriginCode(formSubmission.getFlightOrigin().);
-        return flightInformation;
-    }
-
-    private TravelInformation getTravelInformation(int flightId, FormSubmission formSubmission, CustomerProfile customerProfile) {
-        TravelInformation travelInformation = new TravelInformation();
-        return travelInformation;
-    }*/
 
     private CustomerProfile getCustomerProfile(@Validated @ModelAttribute FormSubmission formSubmission) {
         CustomerProfile customerProfile= new CustomerProfile();

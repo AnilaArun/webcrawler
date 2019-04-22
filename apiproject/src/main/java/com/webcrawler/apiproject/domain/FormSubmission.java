@@ -25,10 +25,10 @@ public class FormSubmission {
         StringBuilder sb = new StringBuilder("FormSubmission{");
 
         if (firstName != null) {
-            sb.append("flightName='" + firstName + "', ");
+            sb.append("firstName='" + firstName + "', ");
         }
         if (lastName != null) {
-            sb.append("flightNumber=" + lastName + ", ");
+            sb.append("lastName=" + lastName + ", ");
         }
         if (phoneNumber != null) {
             sb.append("phoneNumber=" + phoneNumber  + ", ");
@@ -37,10 +37,10 @@ public class FormSubmission {
             sb.append("customerEmail='" + customerEmail + "', ");
         }
         if (flightOrigin != null) {
-            sb.append("flightOriginCode=" + flightOrigin + ", ");
+            sb.append("flightOrigin=" + flightOrigin + ", ");
         }
         if (flightDestination != null) {
-            sb.append("flightDestinationCode=" + flightDestination + ", ");
+            sb.append("flightDestination=" + flightDestination + ", ");
         }
         if (travelDate != null) {
             sb.append("travelDate=" + travelDate + ", ");
