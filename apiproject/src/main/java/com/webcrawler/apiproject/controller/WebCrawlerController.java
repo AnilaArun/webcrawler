@@ -63,7 +63,6 @@ public class WebCrawlerController {
                           @RequestParam(required = false, value = "travelDate") String travelDate,
                           @RequestParam(required = false, value = "frequency") String frequency,
                           Model model) {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MMM-dd");
         FormSubmission formSubmission = new FormSubmission();
         formSubmission.setFirstName(firstName);
         formSubmission.setLastName(lastName);
@@ -72,10 +71,8 @@ public class WebCrawlerController {
         formSubmission.setFlightDestination(flightDestination);
         formSubmission.setFlightOrigin(flightOrigin);
         formSubmission.setFrequency(frequency);
-        if (travelDate != null) {
-            formSubmission.setTravelDate(LocalDate.of(Integer.parseInt(travelDate.substring(0,3)),
-                    Integer.parseInt(travelDate.substring(5,6)), Integer.parseInt(travelDate.substring(7,8))));
-        }
+        formSubmission.setFrequency(frequency);
+        formSubmission.setTravelDate(travelDate);
         model.addAttribute("formSubmission", formSubmission);
         return "home";
 
@@ -107,6 +104,8 @@ public class WebCrawlerController {
     }
 
     private CustomerProfile getCustomerProfile(@Validated @ModelAttribute FormSubmission formSubmission) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
         CustomerProfile customerProfile= new CustomerProfile();
         customerProfile.setFirstName(formSubmission.getFirstName());
         customerProfile.setLastName(formSubmission.getLastName());
@@ -117,7 +116,8 @@ public class WebCrawlerController {
         customerProfile.setFrequency(formSubmission.getFrequency());
         customerProfile.setCreatedDate(LocalDateTime.now());
         customerProfile.setCreatedBy(formSubmission.getFirstName() + " " + formSubmission.getLastName());
-        customerProfile.setTravelDate(formSubmission.getTravelDate());
+
+        customerProfile.setTravelDate(LocalDate.parse(formSubmission.getTravelDate(), format));
 
         return customerProfile;
     }

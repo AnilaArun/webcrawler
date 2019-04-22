@@ -2,6 +2,7 @@ package com.webcrawler.apiproject.domain;
 
 import com.webcrawler.apiproject.annotation.ValidForm;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.GroupSequence;
 import javax.validation.groups.Default;
@@ -18,7 +19,8 @@ public class FormSubmission {
     private String flightOrigin;
     private String flightDestination;
     private String frequency;
-    private LocalDate travelDate;
+    @DateTimeFormat(pattern = "MMMM-yy-dd")
+    private String travelDate;
 
     @Override
     public String toString() {
