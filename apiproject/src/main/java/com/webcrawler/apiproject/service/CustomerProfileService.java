@@ -3,7 +3,6 @@ package com.webcrawler.apiproject.service;
 import com.webcrawler.apiproject.dao.CustomerProfileDAO;
 import com.webcrawler.apiproject.domain.CustomerProfile;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,61 +24,61 @@ public class CustomerProfileService implements CustomerProfileDAO {
 
     @Override
     public <S extends CustomerProfile> Iterable<S> saveAll(Iterable<S> iterable) {
-        return null;
+        return customerProfileDAO.saveAll(iterable);
     }
 
     @Override
     public Optional<CustomerProfile> findById(Long aLong) {
-        return Optional.empty();
+        return customerProfileDAO.findById(aLong);
     }
 
     @Override
     public boolean existsById(Long aLong) {
-        return false;
+        return customerProfileDAO.existsById(aLong);
     }
 
     @Override
     public Iterable<CustomerProfile> findAll() {
-        return null;
+        return customerProfileDAO.findAll();
     }
 
     @Override
     public Iterable<CustomerProfile> findAllById(Iterable<Long> iterable) {
-        return null;
+        return customerProfileDAO.findAllById(iterable);
     }
 
     @Override
     public long count() {
-        return 0;
+        return customerProfileDAO.count();
     }
 
     @Override
     public void deleteById(Long aLong) {
-
+        customerProfileDAO.deleteById(aLong);
     }
 
     @Override
     public void delete(CustomerProfile customerProfile) {
-
+        customerProfileDAO.delete(customerProfile);
     }
 
     @Override
     public void deleteAll(Iterable<? extends CustomerProfile> iterable) {
-
+        customerProfileDAO.deleteAll(iterable);
     }
 
     @Override
     public void deleteAll() {
-
+        customerProfileDAO.deleteAll();
     }
 
     @Override
-    public List<CustomerProfile> findByCustomerEmail(String customerEmail) {
-        return null;
+    public CustomerProfile findByCustomerEmail(String customerEmail) {
+        return customerProfileDAO.findByCustomerEmail(customerEmail);
     }
 
     @Override
     public List<CustomerProfile> findByFrequency(String frequency) {
-        return null;
+        return customerProfileDAO.findByFrequency(frequency);
     }
 }

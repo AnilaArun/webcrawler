@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.validation.GroupSequence;
 import javax.validation.groups.Default;
+import java.time.LocalDate;
 
 @GroupSequence({FormSubmission.class})
 @ValidForm(groups = Default.class)
@@ -17,6 +18,7 @@ public class FormSubmission {
     private String flightOrigin;
     private String flightDestination;
     private String frequency;
+    private LocalDate travelDate;
 
     @Override
     public String toString() {
@@ -39,6 +41,9 @@ public class FormSubmission {
         }
         if (flightDestination != null) {
             sb.append("flightDestinationCode=" + flightDestination + ", ");
+        }
+        if (travelDate != null) {
+            sb.append("travelDate=" + travelDate + ", ");
         }
         if (frequency != null) {
             sb.append("frequency=" + frequency );

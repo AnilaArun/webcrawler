@@ -1,3 +1,3 @@
 document.addEventListener("click", function(){
-    document.getElementById("customerEmail").innerHTML = "Please click in here";
+    document.getElementById("customerEmail").innerHTML = "Please click in herecla";
 });

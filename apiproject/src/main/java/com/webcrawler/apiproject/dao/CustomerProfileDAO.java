@@ -10,7 +10,7 @@ import java.util.List;
 public interface CustomerProfileDAO extends CrudRepository<CustomerProfile, Long> {
 
     //public void save()
-    public List<CustomerProfile> findByCustomerEmail(String customerEmail);
+    public CustomerProfile findByCustomerEmail(String customerEmail);
 
     public List<CustomerProfile> findByFrequency(String frequency);
 }

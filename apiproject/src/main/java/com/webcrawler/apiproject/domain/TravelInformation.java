@@ -3,29 +3,33 @@ package com.webcrawler.apiproject.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "FLIGHTINFORMATION")
-public class FlightInformation {
+@Table(name = "TRAVELINFORMATION")
+public class TravelInformation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String flightName;
-    private String flightNumber;
-    private String flightOriginCode;
-    private String flightDestinationCode;
-    private LocalDateTime flightDateAndTime;
+    private int customerId;
+    private String flightOrigin;
+    private String flightDestination;
+    private int flightInformationId;
+    private float price;
+    private boolean sendEmail;
+    private Date travelDate;
     private String createdBy;
     private String modifiedBy;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
-    private float price;
+    private LocalDate emailSendDate;
 
-    @Override
+    /*@Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("FlightInformation{");
+        StringBuilder sb = new StringBuilder("CustomerProfile{");
 
         if (flightName != null) {
             sb.append("flightName='" + flightName + "', ");
@@ -43,5 +47,5 @@ public class FlightInformation {
         sb.append("}");
 
         return sb.toString();
-    }
+    }*/
 }

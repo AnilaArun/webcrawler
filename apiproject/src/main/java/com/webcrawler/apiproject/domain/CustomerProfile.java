@@ -3,7 +3,9 @@ package com.webcrawler.apiproject.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Data
@@ -18,6 +20,7 @@ public class CustomerProfile {
     private String customerEmail;
     private String flightOrigin;
     private String flightDestination;
+    private LocalDate travelDate;
     private String frequency;
     private String createdBy;
     private String modifiedBy;

@@ -14,6 +14,11 @@ public class FlightInformationService implements FlightInformationDAO {
     @Autowired
     private FlightInformationDAO flightInformationDAO;
 
+    //private FlightInformation flightInformation;
+    /*public FlightInformationService(FlightInformation flightInformation) {
+        this.flightInformation = flightInformation;
+    }*/
+
     @Override
     public FlightInformation save(FlightInformation flightInformation) {
         if (flightInformation != null) {
@@ -24,41 +29,47 @@ public class FlightInformationService implements FlightInformationDAO {
 
     @Override
     public <S extends FlightInformation> Iterable<S> saveAll(Iterable<S> iterable) {
-        return null;
+        return flightInformationDAO.saveAll(iterable);
     }
+
     @Override
     public List<FlightInformation> findByFlightDestinationCode(String flightDestinationCode) {
-        return null;
+        return flightInformationDAO.findByFlightDestinationCode(flightDestinationCode);
     }
 
     @Override
     public List<FlightInformation> findByFlightOriginCode(String flightOriginCode) {
-        return null;
+        return flightInformationDAO.findByFlightOriginCode(flightOriginCode);
     }
+
+    /*@Override
+    public void updateFlightInformation(FlightInformation flightInformation) {
+
+    }*/
 
     @Override
     public Optional<FlightInformation> findById(Long aLong) {
-        return Optional.empty();
+        return flightInformationDAO.findById(aLong);
     }
 
     @Override
-    public boolean existsById(Long aLong) {
-        return false;
+    public boolean existsById(Long flightInfomationId) {
+        return flightInformationDAO.existsById(flightInfomationId);
     }
 
     @Override
     public Iterable<FlightInformation> findAll() {
-        return null;
+        return flightInformationDAO.findAll();
     }
 
     @Override
     public Iterable<FlightInformation> findAllById(Iterable<Long> iterable) {
-        return null;
+        return flightInformationDAO.findAllById(iterable);
     }
 
     @Override
     public long count() {
-        return 0;
+        return flightInformationDAO.count();
     }
 
     @Override
@@ -68,16 +79,16 @@ public class FlightInformationService implements FlightInformationDAO {
 
     @Override
     public void delete(FlightInformation flightInformation) {
-
+        flightInformationDAO.delete(flightInformation);
     }
 
     @Override
     public void deleteAll(Iterable<? extends FlightInformation> iterable) {
-
+        flightInformationDAO.deleteAll(iterable);
     }
 
     @Override
     public void deleteAll() {
-
+        flightInformationDAO.deleteAll();
     }
 }
