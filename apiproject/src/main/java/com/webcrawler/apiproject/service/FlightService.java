@@ -117,14 +117,16 @@ public class FlightService {
 
     private void updateWeeklyCustomers(CustomerProfile customerProfile, TravelInformation travelInformation, FlightInformation flightInformation) {
         try {
-            //if (travelInformation.getEmailSendDate().equals(LocalDate.now().minusDays(7))) {
-                log.info(" Flight name , flight price and time send to " + customerProfile.getCustomerEmail());
+            if (travelInformation.getEmailSendDate().equals(LocalDate.now().minusDays(7))) {
+            log.info(" Flight name [{}], flight price [{}] and FliteDateAndTime  [{}] send to [{}]" ,
+                    flightInformation.getFlightName(), flightInformation.getPrice(),
+                    flightInformation.getFlightDateAndTime(), customerProfile.getCustomerEmail());
                 travelInformation.setEmailSendDate(LocalDate.now());
                 travelInformationDAO.deleteById(Long.valueOf(travelInformation.getId()));
                 travelInformationDAO.save(travelInformation);
-            /*} else {
+            } else {
                 log.info("Frequency do not met");
-            }*/
+            }
         } catch (Exception e) {
         log.error("An Exception occurred : " , e.getMessage());
         throw e;
@@ -134,15 +136,15 @@ public class FlightService {
 
     private void updateDailyCustomers(CustomerProfile customerProfile, TravelInformation travelInformation, FlightInformation flightInformation) {
         try {
-            //if (!travelInformation.getEmailSendDate().equals(LocalDate.now())) {
+            if (!travelInformation.getEmailSendDate().equals(LocalDate.now())) {
                 travelInformation.setEmailSendDate(LocalDate.now());
                 travelInformationDAO.deleteById(Long.valueOf(travelInformation.getId()));
                 travelInformationDAO.save(travelInformation);
                 log.info(" Flight name [{}], flight price [{}] and FliteDateAndTime  [{}] send to [{}]" ,
                         flightInformation.getFlightName(), flightInformation.getPrice(), flightInformation.getFlightDateAndTime(), customerProfile.getCustomerEmail());
-           /* } else {
+            } else {
                 log.info("Email already send");
-            }*/
+            }
         } catch (Exception e) {
             log.error("An Exception occurred : " , e.getMessage());
             throw e;
@@ -151,16 +153,16 @@ public class FlightService {
 
     private void updateMonthlyCustomers(CustomerProfile customerProfile, TravelInformation travelInformation, FlightInformation flightInformation) {
         try {
-            //if (travelInformation.getEmailSendDate().equals(LocalDate.now().minusMonths(1))) {
+            if (travelInformation.getEmailSendDate().equals(LocalDate.now().minusMonths(1))) {
                 log.info(" Flight name [{}], flight price [{}] and FliteDateAndTime  [{}] send to [{}]" ,
                         flightInformation.getFlightName(), flightInformation.getPrice(), flightInformation.getFlightDateAndTime(), customerProfile.getCustomerEmail());
                 travelInformation.setEmailSendDate(LocalDate.now());
                 //As there is no update for specific id , deleting it and readding it to avoid duplicates
                 travelInformationDAO.deleteById(Long.valueOf(travelInformation.getId()));
                 travelInformationDAO.save(travelInformation);
-           /* } else {
+            } else {
                 log.info("Frequency do not met");
-            }*/
+            }
         } catch (Exception e) {
             log.error("An Exception occurred : " , e.getMessage());
             throw e;
