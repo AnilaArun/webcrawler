@@ -73,14 +73,13 @@ public class FlightService {
                         (flightInformation.getFlightDateAndTime().toLocalDate().equals(customerProfile.getTravelDate()))) {
 
                     List<TravelInformation> travelInformations = travelInformationDAO.findByCustomerId(customerProfile.getId());
-                    travelInformations.forEach((TravelInformation travelInformation) -> {
-                        if (!travelInformation.isSendEmail()) {
-                            populateTravelInformationData(flightInformation, customerProfile);
-                            log.info(" Flight name , flight price and time send to " + customerProfile.getCustomerEmail());
-                        } else if (travelInformation.getPrice() >= flightInformation.getPrice() && travelInformation.getCustomerId() == customerProfile.getId()) {
-                             sendEmailBasedOnFrequency(customerProfile, travelInformation, flightInformation);
+                    for (TravelInformation travelInformation : travelInformations) {
+                        //this is to compare the
+                        int price = Float.compare(travelInformation.getPrice(), flightInformation.getPrice());
+                        if (price >= 0 && travelInformation.getCustomerId() == customerProfile.getId()) {
+                            sendEmailBasedOnFrequency(customerProfile, travelInformation, flightInformation);
                         }
-                    });
+                    }
                 } else {
                     log.info("There are no matched data");
                 }
@@ -89,13 +88,13 @@ public class FlightService {
     }
 
     private void sendEmailBasedOnFrequency(CustomerProfile customerProfile, TravelInformation travelInformation, FlightInformation flightInformation) {
-        if (customerProfile.getFrequency().equals(Frequency.DAILY)) {
+        if (customerProfile.getFrequency().equals(Frequency.DAILY.name())) {
             updateDailyCustomers(customerProfile, travelInformation, flightInformation);
-        } else if (customerProfile.getFrequency().equals(Frequency.WEEKLY)) {
+        } else if (customerProfile.getFrequency().equals(Frequency.WEEKLY.name())) {
             updateWeeklyCustomers(customerProfile, travelInformation, flightInformation);
-        } else if (customerProfile.getFrequency().equals(Frequency.MONTHLY)) {
+        } else if (customerProfile.getFrequency().equals(Frequency.MONTHLY.name())) {
             updateMonthlyCustomers(customerProfile, travelInformation, flightInformation);
-        } else if (customerProfile.getFrequency().equals(Frequency.UNCAPPED)) {
+        } else if (customerProfile.getFrequency().equals(Frequency.UNCAPPED.name())) {
             updateUncappedCustomers(customerProfile, travelInformation, flightInformation);
         }
     }
@@ -106,7 +105,7 @@ public class FlightService {
                 flightInformation.getFlightName(), flightInformation.getPrice(), flightInformation.getFlightDateAndTime(), customerProfile.getCustomerEmail());
         try {
             travelInformation.setEmailSendDate(LocalDate.now());
-            travelInformationDAO.deleteById((long) travelInformation.getId());
+            travelInformationDAO.deleteById(Long.valueOf(travelInformation.getId()));
             travelInformationDAO.save(travelInformation);
         } catch (Exception e) {
             log.error("An Exception occurred : " , e.getMessage());
@@ -120,7 +119,7 @@ public class FlightService {
             if (travelInformation.getEmailSendDate().equals(LocalDate.now().minusDays(7))) {
                 log.info(" Flight name , flight price and time send to " + customerProfile.getCustomerEmail());
                 travelInformation.setEmailSendDate(LocalDate.now());
-                travelInformationDAO.deleteById((long) travelInformation.getId());
+                travelInformationDAO.deleteById(Long.valueOf(travelInformation.getId()));
                 travelInformationDAO.save(travelInformation);
             } else {
                 log.info("Frequency do not met");
@@ -136,7 +135,7 @@ public class FlightService {
         try {
             if (!travelInformation.getEmailSendDate().equals(LocalDate.now())) {
                 travelInformation.setEmailSendDate(LocalDate.now());
-                travelInformationDAO.deleteById((long) travelInformation.getId());
+                travelInformationDAO.deleteById(Long.valueOf(travelInformation.getId()));
                 travelInformationDAO.save(travelInformation);
                 log.info(" Flight name [{}], flight price [{}] and FliteDateAndTime  [{}] send to [{}]" ,
                         flightInformation.getFlightName(), flightInformation.getPrice(), flightInformation.getFlightDateAndTime(), customerProfile.getCustomerEmail());
@@ -156,7 +155,7 @@ public class FlightService {
                         flightInformation.getFlightName(), flightInformation.getPrice(), flightInformation.getFlightDateAndTime(), customerProfile.getCustomerEmail());
                 travelInformation.setEmailSendDate(LocalDate.now());
                 //As there is no update for specific id , deleting it and readding it to avoid duplicates
-                travelInformationDAO.deleteById((long) travelInformation.getId());
+                travelInformationDAO.deleteById(Long.valueOf(travelInformation.getId()));
                 travelInformationDAO.save(travelInformation);
             } else {
                 log.info("Frequency do not met");
@@ -192,7 +191,7 @@ public class FlightService {
         Iterable<FlightInformation> flightInformations = flightInformationDAO.findAll();
         flightInformations.forEach((FlightInformation flightInformation)-> {
             if (flightInformation.getFlightDateAndTime().isBefore(LocalDateTime.now())) {
-                flightInformationDAO.deleteById((long) flightInformation.getId());
+                flightInformationDAO.deleteById(Long.valueOf(flightInformation.getId()));
                 log.info("Delete the older file information with date : " + flightInformation.getId());
             }
         });
@@ -200,7 +199,7 @@ public class FlightService {
         Iterable<CustomerProfile> customerProfiles = customerProfileDAO.findAll();
         customerProfiles.forEach((CustomerProfile customerProfile)-> {
             if (customerProfile.getTravelDate().isBefore(LocalDate.now())) {
-                customerProfileDAO.deleteById((long) customerProfile.getId());
+                customerProfileDAO.deleteById(Long.valueOf(customerProfile.getId()));
                 log.info("Delete the older customerProfile with date : " + customerProfile.getId());
             }
         });
@@ -208,7 +207,7 @@ public class FlightService {
         Iterable<TravelInformation> travelInformations = travelInformationDAO.findAll();
         travelInformations.forEach((TravelInformation travelInformation)-> {
             if (travelInformation.getTravelDate().isBefore(LocalDate.now())) {
-                customerProfileDAO.deleteById((long) travelInformation.getId());
+                customerProfileDAO.deleteById(Long.valueOf(travelInformation.getId()));
                 log.info("Delete the older travelInformation with date : " + travelInformation.getId());
             }
         });
