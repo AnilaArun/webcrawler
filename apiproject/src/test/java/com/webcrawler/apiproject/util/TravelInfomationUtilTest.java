@@ -6,15 +6,11 @@ import com.webcrawler.apiproject.domain.FlightInformation;
 import com.webcrawler.apiproject.domain.TravelInformation;
 import com.webcrawler.apiproject.service.TravelInformationService;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import static org.mockito.Mockito.*;
 
@@ -28,8 +24,6 @@ public class TravelInfomationUtilTest {
     CustomerProfile customerProfile;
     @Mock
     FlightInformation flightInformation;
-    @Mock
-    TravelInformation travelInformation;
 
     @Before
     public void setup() {
