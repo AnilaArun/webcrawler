@@ -116,6 +116,8 @@ public class DataInit implements ApplicationRunner {
         FlightInformation secondFlightInformation = new FlightInformation();
         FlightInformation thirdFlightInformation = new FlightInformation();
         FlightInformation fourthFlightInformation = new FlightInformation();
+        FlightInformation fifthFlightInformation = new FlightInformation();
+        FlightInformation sixthFlightInformation = new FlightInformation();
 
         flightInformation.setFlightName("American Airlines");
         flightInformation.setFlightOriginCode(Location.BHD.name());
@@ -143,7 +145,7 @@ public class DataInit implements ApplicationRunner {
         flightInformationDAO.save(secondFlightInformation);
 
         thirdFlightInformation.setFlightName("British Airways");
-        thirdFlightInformation.setFlightNumber("AA 123");
+        thirdFlightInformation.setFlightNumber("BA 123");
         thirdFlightInformation.setFlightOriginCode(Location.COK.name());
         thirdFlightInformation.setFlightDestinationCode(Location.BWI.name());
         thirdFlightInformation.setFlightDateAndTime(LocalDateTime.of(2019, 07, 15, 07, 40));
@@ -155,7 +157,7 @@ public class DataInit implements ApplicationRunner {
         flightInformationDAO.save(thirdFlightInformation);
 
         fourthFlightInformation.setFlightName("Emirates");
-        fourthFlightInformation.setFlightNumber("AA 123");
+        fourthFlightInformation.setFlightNumber("EK 123");
         fourthFlightInformation.setFlightOriginCode(Location.DXB.name());
         fourthFlightInformation.setFlightDestinationCode(Location.DFW.name());
         fourthFlightInformation.setFlightDateAndTime(LocalDateTime.of(2019, 10, 27, 21, 30));
@@ -165,6 +167,30 @@ public class DataInit implements ApplicationRunner {
         fourthFlightInformation.setModifiedDate(null);
         fourthFlightInformation.setPrice(450.38f);
         flightInformationDAO.save(fourthFlightInformation);
+
+        fifthFlightInformation.setFlightName("British Airways");
+        fifthFlightInformation.setFlightNumber("BA 523");
+        fifthFlightInformation.setFlightOriginCode(Location.FLR.name());
+        fifthFlightInformation.setFlightDestinationCode(Location.ORY.name());
+        fifthFlightInformation.setFlightDateAndTime(LocalDateTime.of(2019, 8, 18, 15, 30));
+        fifthFlightInformation.setCreatedBy("System");
+        fifthFlightInformation.setModifiedBy(null);
+        fifthFlightInformation.setCreatedDate(LocalDateTime.now());
+        fifthFlightInformation.setModifiedDate(null);
+        fifthFlightInformation.setPrice(450.38f);
+        flightInformationDAO.save(fifthFlightInformation);
+
+        sixthFlightInformation.setFlightName("Qatar");
+        sixthFlightInformation.setFlightNumber("QR 123");
+        sixthFlightInformation.setFlightOriginCode(Location.LGW.name());
+        sixthFlightInformation.setFlightDestinationCode(Location.DOH.name());
+        sixthFlightInformation.setFlightDateAndTime(LocalDateTime.of(2019, 11, 22, 17, 30));
+        sixthFlightInformation.setCreatedBy("System");
+        sixthFlightInformation.setModifiedBy(null);
+        sixthFlightInformation.setCreatedDate(LocalDateTime.now());
+        sixthFlightInformation.setModifiedDate(null);
+        sixthFlightInformation.setPrice(326.38f);
+        flightInformationDAO.save(sixthFlightInformation);
     }
 
     private void updateTravelInformation() {
