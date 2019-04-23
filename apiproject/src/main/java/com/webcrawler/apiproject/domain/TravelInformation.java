@@ -16,11 +16,11 @@ import java.time.LocalDateTime;
 public class TravelInformation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    private int customerId;
+    private long id;
+    private long customerId;
     private String flightOrigin;
     private String flightDestination;
-    private int flightInformationId;
+    private long flightInformationId;
     private float price;
     private boolean sendEmail;
     private LocalDate travelDate;
@@ -34,10 +34,10 @@ public class TravelInformation {
     public String toString() {
         StringBuilder sb = new StringBuilder("TravelInformation{");
 
-        if ((Integer) customerId != null) {
+        if ((Long) customerId != null) {
             sb.append("customerId='" + customerId + "', ");
         }
-        if ((Integer) flightInformationId != null) {
+        if ((Long) flightInformationId != null) {
             sb.append("flightInformationId=" + flightInformationId + ", ");
         }
         if ((Float) price != null) {

@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface TravelInformationDAO extends CrudRepository<TravelInformation, Long> {
 
-    public List<TravelInformation> findByCustomerId(int customerId);
+    public List<TravelInformation> findByCustomerId(long customerId);
 
     public List<TravelInformation> findByFlightInformationId(String flightInformationId);
 }

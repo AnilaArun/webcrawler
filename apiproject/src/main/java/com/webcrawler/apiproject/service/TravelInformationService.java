@@ -10,11 +10,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @Slf4j
+@Transactional
 public class TravelInformationService implements TravelInformationDAO {
 
     @Autowired
@@ -24,7 +26,7 @@ public class TravelInformationService implements TravelInformationDAO {
         this.travelInformationDAO = travelInformationDAO;
     }
     @Override
-    public List<TravelInformation> findByCustomerId(int customerId) {
+    public List<TravelInformation> findByCustomerId(long customerId) {
         return travelInformationDAO.findByCustomerId(customerId);
     }
 
@@ -95,6 +97,9 @@ public class TravelInformationService implements TravelInformationDAO {
                     (Location.valueOf(flightInformation.getFlightDestinationCode()).getValue().contains(customerProfile.getFlightDestination()))) {
                 TravelInformationUtil.setAndSaveTravelInformationData(travelInformationDAO, customerProfile, flightInformation);
                 log.info("Sending the first email to : " + customerProfile.getFirstName() + " " + customerProfile.getLastName());
+                log.info(" Flight name [{}], flight price [{}] and FliteDateAndTime  [{}] send to [{}]" ,
+                        flightInformation.getFlightName(), flightInformation.getPrice(),
+                        flightInformation.getFlightDateAndTime(), customerProfile.getCustomerEmail());
             }
         });
     }

@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class CustomerProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
     private String firstName;
     private String lastName;
     private String phoneNumber;
