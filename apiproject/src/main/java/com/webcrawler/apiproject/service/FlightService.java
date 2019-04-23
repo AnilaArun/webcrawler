@@ -28,6 +28,18 @@ public class FlightService {
     @Autowired
     TravelInformationDAO travelInformationDAO;
 
+    public void setFlightInformationDAO(FlightInformationDAO flightInformationDAO) {
+        this.flightInformationDAO = flightInformationDAO;
+    }
+
+    public void setCustomerProfileDAO(CustomerProfileDAO customerProfileDAO) {
+        this.customerProfileDAO = customerProfileDAO;
+    }
+
+    public void setTravelInformationDAO(TravelInformationDAO travelInformationDAO) {
+        this.travelInformationDAO = travelInformationDAO;
+    }
+
     public FlightInformation getFlightInformation() {
         FlightInformation flightInformation = new FlightInformation();
         //ResponseEntity<String> response = null; // this can be the response of a restTemplate getForEntity call

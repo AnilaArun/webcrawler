@@ -17,6 +17,10 @@ public class CustomerProfileService implements CustomerProfileDAO {
     @Autowired
     private CustomerProfileDAO customerProfileDAO;
 
+    public void setCustomerProfileDAO(CustomerProfileDAO customerProfileDAO) {
+        this.customerProfileDAO = customerProfileDAO;
+    }
+
     @Override
     public CustomerProfile save(CustomerProfile customerProfile) {
         if (customerProfile != null) {

@@ -17,6 +17,10 @@ public class FlightInformationService implements FlightInformationDAO {
     @Autowired
     private FlightInformationDAO flightInformationDAO;
 
+    public void setFlightInformationDAO(FlightInformationDAO flightInformationDAO) {
+        this.flightInformationDAO = flightInformationDAO;
+    }
+
     @Override
     public FlightInformation save(FlightInformation flightInformation) {
         if (flightInformation != null) {

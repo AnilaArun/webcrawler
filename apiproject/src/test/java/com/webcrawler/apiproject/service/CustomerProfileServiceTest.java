@@ -26,9 +26,9 @@ public class CustomerProfileServiceTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         customerProfileService = new CustomerProfileService();
+        customerProfileService.setCustomerProfileDAO(customerProfileDAO);
     }
 
-    @Ignore
     @Test
     public void checkSave() {
         customerProfileService.save(customerProfile);

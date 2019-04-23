@@ -20,6 +20,9 @@ public class TravelInformationService implements TravelInformationDAO {
     @Autowired
     TravelInformationDAO travelInformationDAO;
 
+    public void setTravelInformationDAO(TravelInformationDAO travelInformationDAO) {
+        this.travelInformationDAO = travelInformationDAO;
+    }
     @Override
     public List<TravelInformation> findByCustomerId(int customerId) {
         return travelInformationDAO.findByCustomerId(customerId);

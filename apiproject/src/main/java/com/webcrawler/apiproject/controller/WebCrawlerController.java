@@ -139,4 +139,15 @@ public class WebCrawlerController {
         return Arrays.asList(Frequency.values());
     }
 
+    public void setCustomerProfileService(CustomerProfileService customerProfileService) {
+        this.customerProfileService = customerProfileService;
+    }
+
+    public void setFlightInformationService(FlightInformationService flightInformationService) {
+        this.flightInformationService = flightInformationService;
+    }
+
+    public void setTravelInformationService(TravelInformationService travelInformationService) {
+        this.travelInformationService = travelInformationService;
+    }
 }
