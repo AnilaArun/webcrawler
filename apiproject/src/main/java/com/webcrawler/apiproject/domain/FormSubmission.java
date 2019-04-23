@@ -6,7 +6,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.GroupSequence;
 import javax.validation.groups.Default;
-import java.time.LocalDate;
 
 @GroupSequence({FormSubmission.class})
 @ValidForm(groups = Default.class)

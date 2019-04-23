@@ -3,7 +3,6 @@ package com.webcrawler.apiproject.service;
 import com.webcrawler.apiproject.dao.CustomerProfileDAO;
 import com.webcrawler.apiproject.domain.CustomerProfile;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
