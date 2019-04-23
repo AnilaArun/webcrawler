@@ -31,9 +31,12 @@ public class FlightInformationUpdatePoller {
         flightService.updateFlightInformation();
     }
 
+    /**
+     * This scheduler to run every 2.5 hours daily to send email to the subscribers
+     */
     @Scheduled(cron = "${poller.customerUpdate.cron}")
     public void scheduleCustomerUpdate() {
-        // This is used to run the scheduler everyday at 7 pm to send the latest flight deals to the customer
+        // This is used to run the scheduler everyday at 2.5 hours interval and about 9 times in a day
         log.info("Inside the FlightDetailsUpdatePoller");
         flightService.updateCustomer();
         flightService.removeOlderData();
